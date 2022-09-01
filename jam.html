@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	    <title>Jam Analog</title>
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height:100vh;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, darkblue, indigo, purple, hotpink);
+                color: white;
+            }
+            
+            .text {
+                margin-top: 400px;
+                position: absolute;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            #text_1,#text_2,#text_3,#text_4 {
+                font-family: Arial, Helvetica, sans-serif;
+                margin-top: -600px;
+                font-size: 30px;
+                text-align: center;
+            }
+            
+            #box_light_1 {
+                position: absolute;
+                border: solid 15px red;
+                width: 500px;
+                height: 500px;
+                animation: move ease-in-out 10s infinite;
+            }
+            
+            #box_light_2 {
+                position: absolute;
+                border: solid 15px red;
+                width: 270px;
+                height: 270px;
+                animation: move ease-in-out 10s infinite;
+            }
+            
+            .jam_analog {
+                content: '';
+                position: absolute;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: solid 1.9px white;
+                border-radius: 100%;
+                backdrop-filter: blur(30px);
+                background-image: url(clock.png);
+                background-size: cover;
+                width: 550px;
+                height: 550px;
+                animation: move ease-in-out 10s infinite;
+            }
+            
+            .glass {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: solid none white;
+                border-radius: 100%;
+                background: radial-gradient(transparent 50%, lightgrey);
+                width: 525px;
+                height: 526px;
+            }
+            
+            .hr,.mn,.sc,.ml {
+                display: flex;
+                position: absolute;
+                justify-content: center;
+                align-items: center;
+            }
+            
+            .hh,.hr {
+                width: 6px;
+                height:300px;
+            }
+            
+            .mm,.mn {
+                width: 8px;
+                height:300px;
+            }
+            
+            .ss,.sc {
+                width: 0px;
+                height:300px;
+            }
+            
+            .md {
+                width: 5px;
+                height:300px;
+            }
+            
+            .ml {
+                border: solid 2px white;
+                border-radius: 100%;
+                width: 100px;
+                height: 100px;
+                background: radial-Gradient(transparent 40%, lightgrey), url('miliseconds.png');
+                background-size: cover;
+                margin-left: 200px;
+                margin-top: 190px;
+            }
+            
+            .md::before {
+                content: '';
+                position: absolute;
+                border: solid 1.8px white;
+                border-radius: 60%;
+                top: 118px;
+                width: 0px;
+                height: 35px;
+            }
+            
+            .hh::before {
+                content: '';
+                position: absolute;
+                border: solid 3px white;
+                background-color: white;
+                border-radius: 40%;
+                top: 50px;
+                width: 3px;
+                height: 100px;
+            }
+            
+            .mm::before {
+                content: '';
+                position: absolute;
+                border: solid 3px white;
+                border-radius: 30%;
+                width: 0px;
+                top: 40px;
+                height: 150px;
+            }
+            
+            .ss::before {
+                content: '';
+                position: absolute;
+                border: solid 1.8px white;
+                border-radius: 30%;
+                top: -18px;
+                width: 0px;
+                height: 250px;
+                z-index: 20px;
+            }
+            
+            .circle {
+                margin-left: 0px;
+                margin-top: 0px;
+                position: absolute;
+                border: solid 3px white;
+                width: 13px;
+                height: 13px;
+                border-radius: 100%;
+                background-color: white;
+            }
+            
+            .mcir {
+                position: absolute;
+                border: solid 3px white;
+                width: 5px;
+                height: 5px;
+                border-radius: 100%;
+                background-color: white;
+            }
+            @keyframes move {
+                0%,100% {
+                    transform: translateY(30px);
+                }
+                75% {
+                    transform: translateX(30px);
+                }
+                50% {
+                    transform: translateY(-30px);
+                }
+                25% {
+                    transform: translateX(-30px);
+                }
+            }
+            
+            .jam_digital {
+                position: absolute;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                margin-top: 185px;
+                margin-left: -9px;
+               
+            }
+            
+            .dh,.dm,.ds,.dl {
+                font-size: 20px;
+                text-align: center;
+                border: solid 1.5px white;
+            }
+            
+            .dl {
+                border: solid 2px white;
+                width: 27px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="box_light_1"></div>
+        <div id="box_light_2"></div>
+        <div class="jam_analog">
+            <div class="glass">
+                <div class="text">
+                    <p id="text_1"></p>
+                    <p id="text_2"></p>
+                    <p id="text_3"></p>
+                    <p id="text_4"></p>
+                </div>
+                <div class="jam_digital">
+                    <p class="dh" id="dh"><p>:</p></p>
+                    <p class="dm" id="dm"><p>:</p></p>
+                    <p class="ds" id="ds"><p>:</p></p>
+                    <p class="dl" id="dl"></p>
+                </div>
+                <div class="hr">
+                    <div class="hh" id="hh"></div>
+                </div>
+                <div class="mn">
+                    <div class="mm" id="mm"></div>
+                </div>
+                <div class="sc">
+                    <div class="ss" id="ss"></div>
+                </div>
+                <div class="ml">
+                    <div class="md" id="md"></div>
+                    <div class="mcir"></div>
+                </div>
+                <div class="circle"></div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            // analog
+            const time = 6;
+            const mili = 2.775;
+            cltime();
+            function cltime() {
+                let clock = new Date();
+                document.getElementById('hh').style.rotate = `${clock.getHours()*30 + clock.getMinutes()*6 / 12}deg`;
+                document.getElementById('mm').style.rotate = `${clock.getMinutes() * time}deg`;
+                document.getElementById('ss').style.rotate = `${clock.getSeconds() * time}deg`;
+	            document.getElementById('md').style.rotate = `${clock.getMilliseconds() / mili}deg`;
+	            setTimeout('cltime()')
+            };
+            
+            // digital
+            setInterval(() => {
+                var newdate = new Date();
+                document.getElementById('dh').innerText = newdate.getHours();
+                document.getElementById('dm').innerText = newdate.getMinutes();
+                document.getElementById('ds').innerText = newdate.getSeconds();
+                document.getElementById('dl').innerText = newdate.getMilliseconds();
+                if (document.getElementById('dh').innerText < 10) {
+                    document.getElementById('dh').innerText = "0" + newdate.getHours()};
+                if (document.getElementById('dm').innerText < 10) {
+                    document.getElementById('dm').innerText = "0" + newdate.getMinutes()};
+                if (document.getElementById('ds').innerText < 10) {
+                    document.getElementById('ds').innerText = "0" + newdate.getSeconds()};
+                }
+            );
+            
+            // day and date
+	        setInterval(() => {
+	            let clock = new Date();
+	            var day = clock.getDay();
+	            var hari = "senin";
+	            if (day == 1) {
+	                hari = "Senin"};
+	            if (day == 2) {
+	                hari = "Selasa"};
+	            if (day == 3) {
+	                hari = "Rabu"};
+	            if (day == 4) {
+	                hari = "Kamis"};
+	            if (day == 5) {
+	                hari = "Jum'at"};
+	            if (day == 6) {
+	                hari = "Sabtu"};
+	            if (day == 7) {
+	                hari = "Minggu"};
+	            document.getElementById('text_1').innerText = hari + ":";
+	            document.getElementById('text_2').innerText = clock.getDate() + ":";
+	            document.getElementById('text_3').innerText = clock.getMonth() + ":"; 
+	            document.getElementById('text_4').innerText = clock.getFullYear();
+	            }
+	        );
+	        
+	        // light style
+	        var rgb_1 = 255; 
+            var rgb_2 = 150;
+            var rgb_3 = 100;
+            var rgb_4 = 255;
+            var bool_1 = true;
+            var bool_2 = false;
+            var bool_3 = false;
+            var bool_4 = false;
+            var bool_5 = false;
+            var bool_6 = false;
+            var bool_7 = false;
+            var bool_8 = false;
+            rgb();
+            function rgb() {
+                if (bool_1) {rgb_1 = rgb_1 - 1};
+                if (rgb_1 == 0) {
+                    bool_2 = true
+                    bool_1 = false
+                    rgb_1 = 1};
+                if (bool_2) {rgb_2 = rgb_2 + 2};
+                if (rgb_2 == 256) {
+                    bool_3 = true
+                    bool_2 = false
+                    rgb_2 = 254};
+                if (bool_3) {rgb_3 = rgb_3 + 1};
+                if (rgb_3 == 256) {
+                    bool_4 = true
+                    bool_3 = false
+                    rgb_3 = 255};
+                if (bool_4) {rgb_4 = rgb_4 - 2};
+                if (rgb_4 <= 0) {
+                    bool_5 = true
+                    bool_4 = false
+                    rgb_4 = 2};
+                if (bool_5) {rgb_1 = rgb_1 + 1};
+                if (rgb_1 == 256) {
+                    bool_6 = true
+                    bool_5 = false
+                    rgb_1 = 255};
+                if (bool_6) {rgb_2 = rgb_2 - 1};
+                if (rgb_2 == 151) {
+                    bool_7 = true
+                    bool_6 = false
+                    rgb_2 = 150};
+                if (bool_7) {rgb_3 = rgb_3 - 0.3};
+                if (rgb_3 <= -1) {
+                    bool_8 = true
+                    bool_7 = false
+                    rgb_3 = 0};
+                if (bool_8) {rgb_4 = rgb_4 + 2};
+                if (rgb_4 >= 256) {
+                    bool_8 = false
+                    bool_1 = true
+                    rgb_4 = 255};
+                document.getElementById('box_light_1').style.border = `solid 15px rgba(${rgb_1},${rgb_2},${-rgb_3},${rgb_4})`
+                document.getElementById('box_light_2').style.border = `solid 15px rgba(${rgb_1},${rgb_2},${rgb_3},${rgb_4})`
+                setTimeout('rgb()')};
+	        
+	        // rotate and size style
+	        var rotate = 0;
+	        var size_1 = 0;
+	        var size_2 = 200;
+	        var bolean_1 = true;
+	        var bolean_2 = true;
+	        setInterval(() => {
+	            rotate += 1;
+	            if (rotate == 360) {
+	                rotate = 0};
+	            document.getElementById('box_light_1').style.rotate = `${rotate}deg`;
+	            document.getElementById('box_light_2').style.rotate = `${-rotate}deg`;
+	            if (size_1 == 300) {
+	                bolean_1 = false};
+	            if (size_1 == 0) {
+	                bolean_1 = true};
+	            if (size_2 == 300) {
+	                bolean_2 = false};
+	            if (size_2 == 0) {
+	                bolean_2 = true};
+	            if (bolean_1) {
+	                size_1 += 2}
+	            else {size_1 -= 2};
+	            if (bolean_2) {
+	                size_2 += 1}
+	            else {size_2 -= 1};
+	            document.getElementById('box_light_1').style.width = `${size_1}px`;
+	            document.getElementById('box_light_1').style.height = `${size_1}px`;
+	            //document.getElementById('box_light_2').style.width = `${size_2}px`;
+                //document.getElementById('box_light_2').style.height = `${size_2}px`;
+	            },
+	        );
+	        
+	        // arrow function ↓↓↓
+	        //const haha = ()=>{
+	        //    console.log("hello")
+	        //}
+	        //haha();
+        </script>
+    </body>
+</html>
